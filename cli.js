@@ -71,7 +71,7 @@ commander
                 const file = readFileSync(packageJsonPath, 'utf-8');
                 packagesObj = JSON.parse(file);
 
-                if (!packagesObj || !packagesObj.dependencies) {
+                if (!packagesObj || (!packagesObj.dependencies&&!command.dev&&!command.peer)) {
                     throw new Error('The package.json not contains dependencies list');
                 }
             } else if (packages.length) {
@@ -105,7 +105,7 @@ commander
                 currStage++;
             }
 
-            if (!packagesObj || !packagesObj.dependencies) {
+            if (!packagesObj || (!packagesObj.dependencies&&!command.dev&&!command.peer)) {
                 return shell.echo(yellow(`Required arguments is missing.
     Please run:
         ${green('// For packages list')}
